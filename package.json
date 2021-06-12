@@ -1,6 +1,6 @@
 {
   "name": "react-before-after-slider-component",
-  "version": "1.0.0",
+  "version": "0.6.0",
   "description": "",
   "main": "src/build.js",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "types": "dist/index.d.ts",
   "author": "smelesh23@gmail.com",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.7",
@@ -32,5 +32,15 @@
   },
   "dependencies": {
     "classnames": "^2.3.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:smeleshkin/react-before-after-slider-component.git"
+  },
+  "keywords": [
+    "react",
+    "component",
+    "typescript",
+    "slider"
+  ]
 }
