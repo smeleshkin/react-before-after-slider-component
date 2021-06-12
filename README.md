@@ -1,0 +1,4 @@
+# REACT-BEFARE-AFTER-SLIDER-COMPONENT
+
+## Build
+npm run build

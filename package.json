@@ -1,0 +1,36 @@
+{
+  "name": "react-before-after-slider-component",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/build.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode=production --env production --progress && tsc"
+  },
+  "types": "dist/index.d.ts",
+  "author": "smelesh23@gmail.com",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "^17.0.11",
+    "@types/react-dom": "^17.0.7",
+    "@types/webpack": "^5.28.0",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.6",
+    "node-sass": "^6.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "sass-loader": "^12.1.0",
+    "style-loader": "^2.0.0",
+    "ts-loader": "^9.2.3",
+    "typescript": "^4.3.2",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.2"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "dependencies": {
+    "classnames": "^2.3.1"
+  }
+}
