@@ -9,18 +9,14 @@ export function isIntersectionObserverSupport() {
 }
 
 
-export interface Photo {
+export interface Image {
     id: number;
-    filename: string;
-    filenameMin: string;
-    albomId: number;
-    width: number;
-    height: number;
+    imageUrl: string;
   }
 
 interface Props {
-    firstPhoto: Photo;
-    secondPhoto: Photo;
+    firstImage: Image;
+    secondImage: Image;
     withDemonstration?: boolean;
     startPercent?: number;
     className?: string;
@@ -53,9 +49,9 @@ function doWithDelay(timeout: number, doCallback: () => void): Promise<void> {
 }
 
 export default function BeforeAfterSlider({
-    firstPhoto,
-    secondPhoto,
-    startPercent = 70,
+    firstImage,
+    secondImage,
+    startPercent = 50,
     className = '',
     withDemonstration,
     withResizeFeel = true,
@@ -182,7 +178,6 @@ export default function BeforeAfterSlider({
 
     return (
         <div
-         
             ref={refContainer}
             className={classNames}
             onMouseDown={onMouseDownHandler}
@@ -190,12 +185,12 @@ export default function BeforeAfterSlider({
             onTouchStart={onMouseDownHandler}
             onTouchMove={onTouchMoveHandler}
         >
-            <img src={firstPhoto.filename} style={{width: '100%', opacity: 0}}/>
+            <img src={firstImage.imageUrl} className="before-after-slider__size-fix-img" />
             <div className="before-after-slider__first-photo-container">
-                <img style={imgStyles} src={firstPhoto.filename} />
+                <img style={imgStyles} src={firstImage.imageUrl} />
             </div>
             <div className="before-after-slider__second-photo-container" style={secondImgContainerStyle}>
-                <img style={imgStyles} src={secondPhoto.filename} />
+                <img style={imgStyles} src={secondImage.imageUrl} />
             </div>
             <div className="before-after-slider__delimer" style={delimerStyle}>
                 <div  className="before-after-slider__delimer-icon-wrapper">

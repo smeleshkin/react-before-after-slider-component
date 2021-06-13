@@ -26,7 +26,12 @@
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background: gray;
+  background: #fff;
   cursor: pointer;
+}
+
+.before-after-slider__size-fix-img {
+  width: 100%;
+  opacity: 0;
 }
 

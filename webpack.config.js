@@ -1,4 +1,6 @@
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const EsmWebpackPlugin = require("@purtuga/esm-webpack-plugin");
 
 const webpackConfig = () => ({
   entry: "./src/index.tsx",
@@ -12,24 +14,42 @@ const webpackConfig = () => ({
   output: {
     path: path.join(__dirname, "/dist"),
     filename: "build.js",
+    library: ['ReactBeforeAfterSliderComponent'],  // Configuring the library namespace
+    libraryTarget: 'umd',          // Configuring the library target
+    libraryExport: 'default',     // Configuring the default export of the entry point to the namespace
+    globalObject: 'this',
   },
-  target: 'web',
+  externals: {
+    react: 'react',
+  },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         loader: "ts-loader",
-        options: {
-          transpileOnly: true,
-        },
-        exclude: /build/,
+        exclude: /node_modules/,
       },
       {
         test: /\.s?css$/,
-        use: ["style-loader", "css-loader"]
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
+              loader: "css-loader",
+          },
+          {
+              loader: 'sass-loader',
+          }
+        ]
       },
     ],
   },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'build.css',
+    })
+  ],
 });
 
 module.exports = webpackConfig;
