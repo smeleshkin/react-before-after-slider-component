@@ -2,3 +2,4 @@ node_modules/
 .vscode/
 .idea/
 screencast.gif
+.DS_Store
