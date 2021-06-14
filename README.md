@@ -2,7 +2,7 @@
 
 [![screencast demo](./screencast.gif)](./screencast.gif)
 
-##Demo
+## Demo
 https://smeleshkin.github.io/react-before-after-slider-component/
 ## Build
 npm run build:npm
