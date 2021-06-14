@@ -4,6 +4,6 @@ node_modules/
 screencast.gif
 .DS_Store
 githubPage/
-distGithubPages/
+docs/
 src
 webpack
