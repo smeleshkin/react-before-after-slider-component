@@ -7,7 +7,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const makeNpmConfig = require('./npm.config.js');
 
 module.exports = () => {
-    const basePath = path.join(__dirname, '../distGithubPages');
+    const basePath = path.join(__dirname, '../docs');
 
     const config = makeNpmConfig();
     config.entry = './githubPage/index.tsx';
