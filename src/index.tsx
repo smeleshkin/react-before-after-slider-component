@@ -185,18 +185,22 @@ export default function BeforeAfterSlider({
             onTouchStart={onMouseDownHandler}
             onTouchMove={onTouchMoveHandler}
         >
-            <img src={firstImage.imageUrl} className="before-after-slider__size-fix-img" />
-            <div className="before-after-slider__first-photo-container">
-                <img style={imgStyles} src={firstImage.imageUrl} />
-            </div>
-            <div className="before-after-slider__second-photo-container" style={secondImgContainerStyle}>
-                <img style={imgStyles} src={secondImage.imageUrl} />
-            </div>
-            <div className="before-after-slider__delimer" style={delimerStyle}>
-                <div  className="before-after-slider__delimer-icon-wrapper">
-                    <div className="before-after-slider__delimer-icon"></div>
-                </div>
-            </div>
+            <img src={firstImage.imageUrl} className="before-after-slider__size-fix-img" onLoad={updateContainerWidth}/>
+            {imagesWidth && (
+                <>
+                    <div className="before-after-slider__first-photo-container">
+                        <img style={imgStyles} src={firstImage.imageUrl} />
+                    </div>
+                    <div className="before-after-slider__second-photo-container" style={secondImgContainerStyle}>
+                        <img style={imgStyles} src={secondImage.imageUrl} />
+                    </div>
+                    <div className="before-after-slider__delimer" style={delimerStyle}>
+                        <div  className="before-after-slider__delimer-icon-wrapper">
+                            <div className="before-after-slider__delimer-icon"></div>
+                        </div>
+                    </div>
+                </>
+            )}
         </div>
     );
 }
