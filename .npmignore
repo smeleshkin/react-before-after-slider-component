@@ -3,3 +3,7 @@ node_modules/
 .idea/
 screencast.gif
 .DS_Store
+githubPage/
+distGithubPages/
+src
+webpack

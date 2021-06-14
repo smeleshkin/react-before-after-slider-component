@@ -3,7 +3,7 @@
 [![screencast demo](./screencast.gif)](./screencast.gif)
 
 ## Build
-npm run build
+npm run build:npm
 ## Usage
 ```
 npm install react-before-after-slider-component --save
@@ -16,15 +16,18 @@ import ReactBeforeSliderComponent from 'react-before-after-slider-component';
 import 'react-before-after-slider-component/dist/build.css';
 ...
 
-const firstImage = {
+const FIRST_IMAGE = {
   id: 1,
   imageUrl: 'https://example.com/.../some-image.jpg'
 };
-const secondImage = {
-  id: 1,
+const SECOND_IMAGE = {
+  id: 2,
   imageUrl: 'https://example.com/.../some-image-2.jpg'
 };
-
-<ReactBeforeSliderComponent firstImage={firstImage} secondImage={secondImage} />
-...
+/* ... */
+<ReactBeforeSliderComponent
+    firstImage={FIRST_IMAGE}
+    secondImage={SECOND_IMAGE}
+/>
+/* ... */
 ```

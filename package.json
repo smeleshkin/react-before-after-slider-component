@@ -1,11 +1,12 @@
 {
   "name": "react-before-after-slider-component",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "",
   "main": "dist/build.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --mode=production --env production --progress && tsc"
+    "build:npm": "webpack --config webpack/npm.config.js --mode=production --env production --progress",
+    "build:githubPages": "webpack --config webpack/githubPages.config.js --mode=production --env production --progress"
   },
   "types": "dist/index.d.ts",
   "author": "smelesh23@gmail.com",
@@ -15,7 +16,10 @@
     "@types/react-dom": "^17.0.1",
     "@types/webpack": "^5.28.0",
     "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "copy-webpack-plugin": "^9.0.0",
     "css-loader": "^5.2.6",
+    "html-webpack-plugin": "^5.3.1",
     "ignore-loader": "^0.1.2",
     "mini-css-extract-plugin": "^1.6.0",
     "node-sass": "^6.0.0",
