@@ -1,6 +1,7 @@
 import React from 'react';
-
 import BeforeAfterSlider, {Image} from '../src';
+
+import './app.scss';
 
 const IMG_BASE_PATH = '/react-before-after-slider-component';
 
@@ -16,8 +17,14 @@ const SECOND_IMAGE: Image = {
 
 export default function App() {
     return (
-        <div>
-            <BeforeAfterSlider firstImage={FIRST_IMAGE} secondImage={SECOND_IMAGE} />
+        <div className="app">
+            <div className="app__content-wrapper">
+                <BeforeAfterSlider
+                    withDemonstration
+                    firstImage={FIRST_IMAGE}
+                    secondImage={SECOND_IMAGE}
+                />
+            </div>
         </div>
     );
 }
