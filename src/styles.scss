@@ -9,6 +9,9 @@
   width: 100%;
   overflow: hidden;
 }
+.before-after-slider img {
+  user-select: none;
+}
 .before-after-slider__first-photo-container img, .before-after-slider__second-photo-container img {
   width: 100%;
 }
