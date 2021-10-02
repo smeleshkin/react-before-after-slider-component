@@ -15,7 +15,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Building npm version
-        run: build:npm
+        run: npm run build:npm
   build-github-pages:
     runs-on: ubuntu-latest
     steps:
@@ -28,6 +28,6 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Building Github Pages
-        run: build:githubPages
+        run: npm run build:githubPages
 
 
