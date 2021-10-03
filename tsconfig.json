@@ -19,6 +19,6 @@
     "noUnusedParameters": true,
     "allowSyntheticDefaultImports": true,
   },
-  "include": ["src", "githubPage"],
+  "include": ["src"],
   "exclude": ["node_modules", "build"],
 }
