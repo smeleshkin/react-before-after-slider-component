@@ -8,3 +8,4 @@ docs/
 src
 webpack
 .github
+.npmrc
