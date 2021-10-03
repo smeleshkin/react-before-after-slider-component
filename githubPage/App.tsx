@@ -3,7 +3,7 @@ import BeforeAfterSlider, {Image} from '../src';
 
 import './app.scss';
 
-const IMG_BASE_PATH = '';
+const IMG_BASE_PATH = '/react-before-after-slider-component';
 
 const FIRST_IMAGE: Image = {
     id: 1,
