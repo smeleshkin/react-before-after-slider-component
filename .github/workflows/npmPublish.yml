@@ -18,4 +18,4 @@ jobs:
       - name: Building npm version
         run: npm run build:npm
       - name: NPM publish
-      - run: npm config set '//registry.npmjs.org/:_authToken' '${{ secrets.NPM_TOKEN }}' && npm publish
+        run: npm config set '//registry.npmjs.org/:_authToken' '${{ secrets.NPM_TOKEN }}' && npm publish
