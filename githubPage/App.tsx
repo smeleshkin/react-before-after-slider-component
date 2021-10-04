@@ -6,12 +6,10 @@ import './app.scss';
 const IMG_BASE_PATH = '/react-before-after-slider-component';
 
 const FIRST_IMAGE: Image = {
-    id: 1,
     imageUrl: `${IMG_BASE_PATH}/assets/image1.jpg`,
 }
 
 const SECOND_IMAGE: Image = {
-    id: 2,
     imageUrl: `${IMG_BASE_PATH}/assets/image2.jpg`,
 }
 

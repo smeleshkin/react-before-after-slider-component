@@ -1,6 +1,6 @@
 {
   "name": "react-before-after-slider-component",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "dist/build.js",
   "scripts": {
@@ -47,6 +47,9 @@
     "react",
     "component",
     "typescript",
-    "slider"
+    "slider",
+    "compare",
+    "comparison",
+    "before and after"
   ]
 }
