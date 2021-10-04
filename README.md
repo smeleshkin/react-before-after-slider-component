@@ -1,4 +1,5 @@
 # React before after slider component
+Simple slider component for comparing images. Before and after.
 
 [![screencast demo](./screencast.gif)](./screencast.gif)
 
@@ -6,7 +7,7 @@
 https://smeleshkin.github.io/react-before-after-slider-component/
 ## Build
 npm run build:npm
-## Usage
+## Basic usage
 ```
 npm install react-before-after-slider-component --save
 ```
@@ -19,11 +20,9 @@ import 'react-before-after-slider-component/dist/build.css';
 ...
 
 const FIRST_IMAGE = {
-  id: 1,
   imageUrl: 'https://example.com/.../some-image.jpg'
 };
 const SECOND_IMAGE = {
-  id: 2,
   imageUrl: 'https://example.com/.../some-image-2.jpg'
 };
 /* ... */
@@ -32,4 +31,24 @@ const SECOND_IMAGE = {
     secondImage={SECOND_IMAGE}
 />
 /* ... */
+```
+## Props
+
+| Attribute                  | Required  | Type     | Default | Description                                                           
+|----------------------------|-----------|----------|---------|-------------------------------
+| `firstImage`               | true      | Image    |         | Image object with source url.     
+| `secontImage`              | true      | Image    |         | Image object with source url. 
+| `currentPercentPosition`   | false     | number   | 50      | Start delimiter position. Or also the current position, if it will change in parent.
+| `className`                | false     | string   |         | Custom classname.
+| `withResizeFeel`           | false     | boolean  | true    | Feeling to window resizing.
+| `onReady`                  | false     | function |         | On slider ready callback.
+| `onVisible`                | false     | function |         | On slider visible in viewport callback.
+| `onChangePercentPosition`  | false     | function |         | On delimiter position update callback. Has new position parameter.
+
+##Specific Types
+
+```ts
+interface Image {
+    imageUrl: string;
+}
 ```

@@ -9,7 +9,7 @@ export function isIntersectionObserverSupport() {
 }
 
 export interface Image {
-    id: number;
+    id?: string | number;
     imageUrl: string;
 }
 

@@ -47,6 +47,9 @@
     "react",
     "component",
     "typescript",
-    "slider"
+    "slider",
+    "compare",
+    "comparison",
+    "before and after"
   ]
 }
