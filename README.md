@@ -37,7 +37,7 @@ const SECOND_IMAGE = {
 | Attribute                  | Required  | Type     | Default | Description                                                           
 |----------------------------|-----------|----------|---------|-------------------------------
 | `firstImage`               | true      | Image    |         | Image object with source url.     
-| `secontImage`              | true      | Image    |         | Image object with source url. 
+| `secondImage`              | true      | Image    |         | Image object with source url. 
 | `currentPercentPosition`   | false     | number   | 50      | Start delimiter position. Or also the current position, if it will change in parent.
 | `className`                | false     | string   |         | Custom classname.
 | `withResizeFeel`           | false     | boolean  | true    | Feeling to window resizing.
@@ -45,7 +45,7 @@ const SECOND_IMAGE = {
 | `onVisible`                | false     | function |         | On slider visible in viewport callback.
 | `onChangePercentPosition`  | false     | function |         | On delimiter position update callback. Has new position parameter.
 
-##Specific Types
+## Specific Types
 
 ```ts
 interface Image {
