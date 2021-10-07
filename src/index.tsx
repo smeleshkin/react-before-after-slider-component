@@ -29,6 +29,7 @@ interface Props {
     onReady?: OnSliderLoadCallback,
     onVisible?: () => void,
     onChangePercentPosition?: (newPosition: number) => void,
+    delimiterColor?: string,
 }
 
 function useReadyStatus(
@@ -105,6 +106,7 @@ export default function BeforeAfterSlider({
     onVisible,
     onReady,
     onChangePercentPosition,
+    delimiterColor,
 }: Props) {
     const classNames = cn('before-after-slider', className);
     const refContainer = useRef<HTMLDivElement>(null);
@@ -171,8 +173,13 @@ export default function BeforeAfterSlider({
 
     const imgStyles = !imagesWidth ? undefined : {width: `${imagesWidth}px`};
     const secondImgContainerStyle = {width: `${delimerPercentPosition}%`};
-
-    const delimerPositionStyle = {left: `${delimerPercentPosition}%`};
+    const delimiterIconStyles = {
+        backgroundColor: delimiterColor,
+    };
+    const delimiterPositionStyle = {
+        left: `${delimerPercentPosition}%`,
+        backgroundColor: delimiterColor,
+    };
 
     const updateContainerPosition = () => {
         if (!refContainer.current) return;
@@ -236,9 +243,9 @@ export default function BeforeAfterSlider({
                             draggable={false}
                         />
                     </div>
-                    <div className="before-after-slider__delimer" style={delimerPositionStyle}>
-                        <div  className="before-after-slider__delimer-icon-wrapper">
-                            <div className="before-after-slider__delimer-icon" />
+                    <div className="before-after-slider__delimiter" style={delimiterPositionStyle}>
+                        <div>
+                            <div className="before-after-slider__delimiter-icon" style={delimiterIconStyles}/>
                         </div>
                     </div>
                 </>
