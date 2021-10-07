@@ -26,7 +26,6 @@ export default function App() {
     const [delimerPersentPosition, setDelimerPercentPosition] = useState(50);
 
     const demonstrate = () => {
-        console.log('demonstrate');
         setTimeout(async () => {
             const PARTS = 50;
             const timeSeconds = 0.1;

@@ -1,5 +1,4 @@
 import React, {MouseEventHandler, TouchEventHandler, useEffect, useRef, useState} from 'react';
-import cn from 'classnames';
 
 import './styles.scss';
 
@@ -106,7 +105,9 @@ export default function BeforeAfterSlider({
     onReady,
     onChangePercentPosition,
 }: Props) {
-    const classNames = cn('before-after-slider', className);
+    const classNames = ['before-after-slider'];
+    className && classNames.push(className);
+
     const refContainer = useRef<HTMLDivElement>(null);
     const [imagesWidth, setImagesWidth] = useState<number | null>(null);
     const [delimerPercentPosition, setDelimerPosition] = useState(
@@ -211,7 +212,7 @@ export default function BeforeAfterSlider({
     return (
         <div
             ref={refContainer}
-            className={classNames}
+            className={classNames.join(' ')}
             onMouseDown={onMouseDownHandler}
             onMouseMove={onMouseMoveHandler}
             onTouchStart={onMouseDownHandler}
