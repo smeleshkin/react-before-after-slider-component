@@ -36,8 +36,9 @@ const SECOND_IMAGE = {
 
 | Attribute                  | Required  | Type     | Default | Description                                                           
 |----------------------------|-----------|----------|---------|-------------------------------
-| `firstImage`               | true      | Image    |         | Image object with source url.     
-| `secondImage`              | true      | Image    |         | Image object with source url. 
+| `firstImage`               | true      | Image    |         | Image object with source url. 
+| `secondImage`              | true      | Image    |         | Image object with source url.
+| `delimiterColor`           | false     | string   |         | Custom delimiter background color. 
 | `currentPercentPosition`   | false     | number   | 50      | Start delimiter position. Or also the current position, if it will change in parent.
 | `className`                | false     | string   |         | Custom classname.
 | `withResizeFeel`           | false     | boolean  | true    | Feeling to window resizing.
