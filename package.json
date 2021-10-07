@@ -36,9 +36,6 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
-  "dependencies": {
-    "classnames": "^2.3.1"
-  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com:smeleshkin/react-before-after-slider-component.git"
