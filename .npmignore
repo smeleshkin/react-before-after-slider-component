@@ -9,3 +9,4 @@ src
 webpack
 .github
 .npmrc
+tsconfig.json
