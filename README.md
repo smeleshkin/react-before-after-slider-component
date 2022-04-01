@@ -17,7 +17,6 @@ Then use it in your app:
 import React from 'react';
 import ReactBeforeSliderComponent from 'react-before-after-slider-component';
 import 'react-before-after-slider-component/dist/build.css';
-...
 
 const FIRST_IMAGE = {
   imageUrl: 'https://example.com/.../some-image.jpg'
@@ -50,6 +49,7 @@ const SECOND_IMAGE = {
 
 ```ts
 interface Image {
-    imageUrl: string;
+    imageUrl: string,
+    alt?: string,
 }
 ```

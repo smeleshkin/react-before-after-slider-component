@@ -10,6 +10,13 @@ module.exports = () => {
     const basePath = path.join(__dirname, '../docs');
 
     const config = makeNpmConfig();
+    config.devServer = {
+        static: {
+            directory: basePath,
+        },
+        compress: true,
+            port: 9000,
+    };
     config.entry = './githubPage/index.tsx';
     config.output = {
         path: basePath,
