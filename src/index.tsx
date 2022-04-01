@@ -8,8 +8,8 @@ export function isIntersectionObserverSupport() {
 }
 
 export interface Image {
-    id?: string | number;
     imageUrl: string;
+    alt?: string,
 }
 
 type OnSliderLoadCallback = () => void;
@@ -234,6 +234,7 @@ export default function BeforeAfterSlider({
                             src={firstImage.imageUrl}
                             onLoad={onImageLoad}
                             draggable={false}
+                            alt={firstImage.alt}
                         />
                     </div>
                     <div className="before-after-slider__second-photo-container" style={secondImgContainerStyle}>
@@ -242,6 +243,7 @@ export default function BeforeAfterSlider({
                             src={secondImage.imageUrl}
                             onLoad={onImageLoad}
                             draggable={false}
+                            alt={firstImage.alt}
                         />
                     </div>
                     <div className="before-after-slider__delimiter" style={delimiterPositionStyle}>

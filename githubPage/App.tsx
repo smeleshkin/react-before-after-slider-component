@@ -1,17 +1,9 @@
 import React, { useState} from 'react';
-import BeforeAfterSlider, {Image} from '../src';
+import BeforeAfterSlider from '../src';
 
 import './app.scss';
 
 const IMG_BASE_PATH = '/react-before-after-slider-component';
-
-const FIRST_IMAGE: Image = {
-    imageUrl: `${IMG_BASE_PATH}/assets/image1.jpg`,
-}
-
-const SECOND_IMAGE: Image = {
-    imageUrl: `${IMG_BASE_PATH}/assets/image2.jpg`,
-}
 
 function doWithDelay(timeout: number, doCallback: () => void): Promise<void> {
     return new Promise((res) => {
@@ -22,7 +14,23 @@ function doWithDelay(timeout: number, doCallback: () => void): Promise<void> {
     })
 }
 
+function createImageUrl(url: string): string {
+    return window.location.host.includes('localhost')
+        ? url
+        : `${IMG_BASE_PATH}/${url}`;
+}
+
 export default function App() {
+    const [{firstImage, secondImage}] = useState({
+        firstImage: {
+            imageUrl: createImageUrl(`/assets/image1.jpg`),
+            alt: 'Image after'
+        },
+        secondImage: {
+            imageUrl: createImageUrl(`/assets/image2.jpg`),
+            alt: 'Image after'
+        }
+    });
     const [delimerPersentPosition, setDelimerPercentPosition] = useState(50);
 
     const demonstrate = () => {
@@ -55,8 +63,8 @@ export default function App() {
             <div className="app__content-wrapper">
                 <BeforeAfterSlider
                     currentPercentPosition={delimerPersentPosition}
-                    firstImage={FIRST_IMAGE}
-                    secondImage={SECOND_IMAGE}
+                    firstImage={firstImage}
+                    secondImage={secondImage}
                     onVisible={demonstrate}
                     onChangePercentPosition={setDelimerPercentPosition}
                 />
