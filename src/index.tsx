@@ -37,6 +37,7 @@ function useReadyStatus(
     onReady?: OnSliderLoadCallback
 ) {
     const [isReady, setIsReady] = useState(false);
+    
 
     const [imagesLoadedCount, setImagesLoadedCount] = useState(0);
     const incrementLoadedImagesCount = () => {
@@ -62,6 +63,9 @@ function useReadyStatus(
 }
 
 function useInit(updateContainerWidth: () => void, onMouseUpHandler: () => void) {
+    
+    
+
     useEffect(() => {
         updateContainerWidth();
         document.addEventListener('click', onMouseUpHandler);
@@ -122,6 +126,7 @@ export default function BeforeAfterSlider({
         top: 0,
         left: 0,
     });
+    const [isMobile, setIsMobile] = useState(false);
     /**
      * Observer start
      */
@@ -143,6 +148,17 @@ export default function BeforeAfterSlider({
             ? new IntersectionObserver(observerCallback, observerOptions)
             : null
     );
+
+    useEffect(() => {
+        if(typeof window !== "undefined"){
+            if(window.innerWidth < 769){
+                setIsMobile(true);
+            }else{
+                setIsMobile(false);
+            }
+        }
+    },[]);
+
     useEffect(() => {
         if (observer) {
             if (!isReady) return;
@@ -194,14 +210,21 @@ export default function BeforeAfterSlider({
 
     const onMouseDownHandler = () => {
         updateContainerPosition();
-        setSliderMode(MODE.MOVE);
+
+        if(!isMobile){
+            setSliderMode(MODE.MOVE);
+        }
+        //setSliderMode(MODE.MOVE);
     }
 
     const onMouseMoveHandler: MouseEventHandler<HTMLDivElement>
-        = (e ) => onMoveHandler(e);
+        = (e ) => {
+            onMoveHandler(e);
+        }
 
     const onTouchMoveHandler: TouchEventHandler<HTMLDivElement>
         = (e) => {
+        setSliderMode(MODE.MOVE);
         onMoveHandler(e.touches[0]);
     };
 
