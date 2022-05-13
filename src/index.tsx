@@ -127,6 +127,7 @@ export default function BeforeAfterSlider({
         left: 0,
     });
     const [isMobile, setIsMobile] = useState(false);
+    const [isDelimiterClicked, setIsDelimiterClicked] = useState(false);
     /**
      * Observer start
      */
@@ -224,8 +225,11 @@ export default function BeforeAfterSlider({
 
     const onTouchMoveHandler: TouchEventHandler<HTMLDivElement>
         = (e) => {
-        setSliderMode(MODE.MOVE);
-        onMoveHandler(e.touches[0]);
+        if(isDelimiterClicked){
+            console.log("delimitador tocado");
+            setSliderMode(MODE.MOVE);
+            onMoveHandler(e.touches[0]);
+        }
     };
 
     const onMoveHandler = (e: React.Touch | React.MouseEvent) => {
@@ -269,7 +273,23 @@ export default function BeforeAfterSlider({
                             alt={firstImage.alt}
                         />
                     </div>
-                    <div className="before-after-slider__delimiter" style={delimiterPositionStyle}>
+                    <div className="before-after-slider__delimiter" style={delimiterPositionStyle}
+                        onTouchStart={() => {
+                            console.log("touch start");
+                            setIsDelimiterClicked(true);
+                        }}
+                        onTouchMove={() => {
+                            console.log("touch move");
+                            setIsDelimiterClicked(true);
+                        }}
+                        onTouchEnd={() => {
+                            console.log("touch end");
+                            setIsDelimiterClicked(false);
+                        }}
+                        onTouchCancel={() => {
+                            console.log("touch cancel");
+                            setIsDelimiterClicked(false);
+                        }}>
                         <div>
                             <div className="before-after-slider__delimiter-icon" style={delimiterIconStyles}/>
                         </div>
