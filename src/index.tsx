@@ -226,7 +226,6 @@ export default function BeforeAfterSlider({
     const onTouchMoveHandler: TouchEventHandler<HTMLDivElement>
         = (e) => {
         if(isDelimiterClicked){
-            console.log("delimitador tocado");
             setSliderMode(MODE.MOVE);
             onMoveHandler(e.touches[0]);
         }
@@ -275,19 +274,15 @@ export default function BeforeAfterSlider({
                     </div>
                     <div className="before-after-slider__delimiter" style={delimiterPositionStyle}
                         onTouchStart={() => {
-                            console.log("touch start");
                             setIsDelimiterClicked(true);
                         }}
                         onTouchMove={() => {
-                            console.log("touch move");
                             setIsDelimiterClicked(true);
                         }}
                         onTouchEnd={() => {
-                            console.log("touch end");
                             setIsDelimiterClicked(false);
                         }}
                         onTouchCancel={() => {
-                            console.log("touch cancel");
                             setIsDelimiterClicked(false);
                         }}>
                         <div>
