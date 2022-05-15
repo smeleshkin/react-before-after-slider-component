@@ -29,6 +29,7 @@ interface Props {
     onVisible?: () => void,
     onChangePercentPosition?: (newPosition: number) => void,
     delimiterColor?: string,
+    feelsOnlyTheDelimiter?: boolean,
 }
 
 function useReadyStatus(
@@ -106,6 +107,7 @@ export default function BeforeAfterSlider({
     onReady,
     onChangePercentPosition,
     delimiterColor,
+    feelsOnlyTheDelimiter = false,
 }: Props) {
     const classNames = ['before-after-slider'];
     className && classNames.push(className);
@@ -216,14 +218,20 @@ export default function BeforeAfterSlider({
 
     useResizeFeel(updateContainerWidth, withResizeFeel);
 
+    const onClickHandlers = {
+        onMouseDown: onMouseDownHandler,
+        onTouchStart: onMouseDownHandler,
+    }
+
     return (
         <div
             ref={refContainer}
             className={classNames.join(' ')}
-            onMouseDown={onMouseDownHandler}
             onMouseMove={onMouseMoveHandler}
-            onTouchStart={onMouseDownHandler}
             onTouchMove={onTouchMoveHandler}
+            onTouchEnd={onMouseUpHandler}
+            onTouchCancel={onMouseUpHandler}
+            {...(!feelsOnlyTheDelimiter ? onClickHandlers : {})}
         >
             <img src={firstImage.imageUrl} className="before-after-slider__size-fix-img" onLoad={updateContainerWidth}/>
             {Boolean(imagesWidth) && (
@@ -246,7 +254,11 @@ export default function BeforeAfterSlider({
                             alt={firstImage.alt}
                         />
                     </div>
-                    <div className="before-after-slider__delimiter" style={delimiterPositionStyle}>
+                    <div
+                        className="before-after-slider__delimiter"
+                        style={delimiterPositionStyle}
+                        {...feelsOnlyTheDelimiter ? onClickHandlers : {}}
+                    >
                         <div>
                             <div className="before-after-slider__delimiter-icon" style={delimiterIconStyles}/>
                         </div>
