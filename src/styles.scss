@@ -21,7 +21,6 @@
 .before-after-slider__delimiter {
   position: absolute;
   height: 100%;
-  background: #fff;
   width: 5px;
   top: 0;
   display: flex;
@@ -32,8 +31,11 @@
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background: #fff;
   cursor: pointer;
+}
+.before-after-slider__delimiter-img {
+  cursor: pointer;
+  user-select: none;
 }
 
 .before-after-slider__size-fix-img {
