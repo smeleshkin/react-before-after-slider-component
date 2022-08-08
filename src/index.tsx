@@ -96,7 +96,8 @@ function normalizeNewPosition(newPosition: number, imagesWidth: number) {
     return newPosition;
 }
 
-const DEFAULT_START_PERSENT = 50;
+const DEFAULT_START_PERCENT = 50;
+const DEFAULT_BACKGROUND_COLOR = '#fff';
 
 export default function BeforeAfterSlider({
     firstImage,
@@ -109,16 +110,16 @@ export default function BeforeAfterSlider({
     onChangePercentPosition,
     delimiterIconStyles,
     feelsOnlyTheDelimiter = false,
-    delimiterColor,
+    delimiterColor = DEFAULT_BACKGROUND_COLOR,
 }: Props) {
     const classNames = ['before-after-slider'];
     className && classNames.push(className);
 
     const refContainer = useRef<HTMLDivElement>(null);
     const [imagesWidth, setImagesWidth] = useState<number | null>(null);
-    const [delimerPercentPosition, setDelimerPosition] = useState(
+    const [delimiterPercentPosition, setDelimiterPosition] = useState(
         currentPercentPosition
-        || DEFAULT_START_PERSENT
+        || DEFAULT_START_PERCENT
     );
     const [sliderMode, setSliderMode] = useState<MODE>(MODE.DEFAULT);
     const {onImageLoad, isReady} = useReadyStatus(imagesWidth, refContainer, onReady);
@@ -129,14 +130,14 @@ export default function BeforeAfterSlider({
     /**
      * Observer start
      */
-    const observerVisiblePersent = 0.95;
+    const observerVisiblePercent = 0.95;
     const observerOptions = {
-        threshold: [0.0, observerVisiblePersent],
+        threshold: [0.0, observerVisiblePercent],
     };
     const observerCallback = function(entries: IntersectionObserverEntry[]) {
         if (!observer || !onVisible) return;
         entries.forEach(entry => {
-            if (entry.intersectionRatio > observerVisiblePersent) {
+            if (entry.intersectionRatio > observerVisiblePercent) {
                 observer.disconnect();
                 onVisible();
             }
@@ -161,7 +162,7 @@ export default function BeforeAfterSlider({
         if (!currentPercentPosition || !imagesWidth) {
             return;
         }
-        setDelimerPosition(normalizeNewPosition(currentPercentPosition, imagesWidth));
+        setDelimiterPosition(normalizeNewPosition(currentPercentPosition, imagesWidth));
     }, [currentPercentPosition, imagesWidth]);
 
     const updateContainerWidth = () => {
@@ -177,7 +178,7 @@ export default function BeforeAfterSlider({
     useInit(updateContainerWidth, onMouseUpHandler);
 
     const imgStyles = !imagesWidth ? undefined : {width: `${imagesWidth}px`};
-    const secondImgContainerStyle = {width: `${delimerPercentPosition}%`};
+    const secondImgContainerStyle = {width: `${delimiterPercentPosition}%`};
 
     const preparedDelimiterIconStyles = React.useMemo(() => ({
         backgroundColor: delimiterColor,
@@ -185,9 +186,9 @@ export default function BeforeAfterSlider({
     }), [delimiterColor, delimiterIconStyles]);
 
     const delimiterStyle = React.useMemo(() => ({
-        left: `${delimerPercentPosition}%`,
+        left: `${delimiterPercentPosition}%`,
         backgroundColor: delimiterColor,
-    }), [delimerPercentPosition, delimiterColor]);
+    }), [delimiterPercentPosition, delimiterColor]);
 
     const updateContainerPosition = () => {
         if (!refContainer.current) return;
@@ -217,7 +218,9 @@ export default function BeforeAfterSlider({
             if (!imagesWidth) return;
             const X = e.pageX - containerPosition.left;
             const newPosition = normalizeNewPosition(X, imagesWidth) / imagesWidth * 100;
-            onChangePercentPosition ? onChangePercentPosition(newPosition) : setDelimerPosition(newPosition);
+            onChangePercentPosition
+                ? onChangePercentPosition(newPosition)
+                : setDelimiterPosition(newPosition);
         }
     }
 

@@ -66,8 +66,9 @@ export default function App() {
 
     const [feelsOnlyTheDelimiter, setFeelsOnlyTheDelimiter] = useState<boolean>(false);
     const toggleFeelsOnlyTheDelimiter = () => setFeelsOnlyTheDelimiter(!feelsOnlyTheDelimiter);
-    const [delimiterPersentPosition, setDelimiterPercentPosition] = useState<number>(START_POSITION);
+    const [delimiterPercentPosition, setDelimiterPercentPosition] = useState<number>(START_POSITION);
 
+    /** CustomStyles start */
     const logoUrl = React.useMemo(() => createImageUrl(`/assets/logo.png`), []);
     const [delimiterIconStyles, setDelimiterIconStyles] = useState<React.CSSProperties | undefined>();
     const toggleDelimiterIconStyles = () => setDelimiterIconStyles(
@@ -75,6 +76,12 @@ export default function App() {
             ? {...DELIMITER_WITH_LOGO_STYLES, backgroundImage: `url(${logoUrl})`}
             : undefined
     );
+    const toggleIconStylesButtonText = [
+        'Now: Delimiter icon',
+        (delimiterIconStyles ? 'with' : 'without'),
+        'custom styles',
+    ].join(' ');
+    /** CustomStyles end */
 
     /** Animation start */
     const allAnimationsRef = useRef<Animation[]>([]);
@@ -132,17 +139,11 @@ export default function App() {
         'is clickable'
     ].join(' ');
 
-    const toggleIconStylesButtonText = [
-        'Now: Delimiter icon',
-        (delimiterIconStyles ? 'with' : 'without'),
-        'custom styles',
-    ].join(' ');
-
     return (
         <div className="app">
             <div className="app__content-wrapper">
                 <BeforeAfterSlider
-                    currentPercentPosition={delimiterPersentPosition}
+                    currentPercentPosition={delimiterPercentPosition}
                     firstImage={firstImage}
                     secondImage={secondImage}
                     onVisible={demonstrate}
@@ -151,12 +152,12 @@ export default function App() {
                     delimiterIconStyles={delimiterIconStyles}
                 />
                 <div className="app__buttons">
-                    <div>
+                    <div className="app__buttons__button-wrapper">
                         <button onClick={toggleFeelsOnlyTheDelimiter}>
                              {buttonText}
                         </button>
                     </div>
-                    <div>
+                    <div className="app__buttons__button-wrapper">
                         <button onClick={toggleDelimiterIconStyles}>
                             {toggleIconStylesButtonText}
                         </button>
