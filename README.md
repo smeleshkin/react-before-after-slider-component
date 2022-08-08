@@ -57,11 +57,14 @@ interface Image {
 ```
 
 ## Custom logo example
-```ts{
+```ts
+// Pass this as a delimiterIconStyles property
+const delimiterIconStyles = {
    width: '50px',
    height: '50px',
    backgroundSize: 'cover',
    borderRadius: 'none',
    backgroundImage: 'url(<some-path-here>)'
 }
+
 ```
