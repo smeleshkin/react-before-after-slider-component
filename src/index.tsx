@@ -28,8 +28,9 @@ interface Props {
     onReady?: OnSliderLoadCallback,
     onVisible?: () => void,
     onChangePercentPosition?: (newPosition: number) => void,
-    delimiterColor?: string,
     feelsOnlyTheDelimiter?: boolean,
+    delimiterIconStyles?: React.CSSProperties,
+    delimiterColor?: string,
 }
 
 function useReadyStatus(
@@ -106,8 +107,9 @@ export default function BeforeAfterSlider({
     onVisible,
     onReady,
     onChangePercentPosition,
-    delimiterColor,
+    delimiterIconStyles,
     feelsOnlyTheDelimiter = false,
+    delimiterColor,
 }: Props) {
     const classNames = ['before-after-slider'];
     className && classNames.push(className);
@@ -176,13 +178,16 @@ export default function BeforeAfterSlider({
 
     const imgStyles = !imagesWidth ? undefined : {width: `${imagesWidth}px`};
     const secondImgContainerStyle = {width: `${delimerPercentPosition}%`};
-    const delimiterIconStyles = {
+
+    const preparedDelimiterIconStyles = React.useMemo(() => ({
         backgroundColor: delimiterColor,
-    };
-    const delimiterPositionStyle = {
+        ...(delimiterIconStyles ? delimiterIconStyles : {}),
+    }), [delimiterColor, delimiterIconStyles]);
+
+    const delimiterStyle = React.useMemo(() => ({
         left: `${delimerPercentPosition}%`,
         backgroundColor: delimiterColor,
-    };
+    }), [delimerPercentPosition, delimiterColor]);
 
     const updateContainerPosition = () => {
         if (!refContainer.current) return;
@@ -256,11 +261,14 @@ export default function BeforeAfterSlider({
                     </div>
                     <div
                         className="before-after-slider__delimiter"
-                        style={delimiterPositionStyle}
+                        style={delimiterStyle}
                         {...feelsOnlyTheDelimiter ? onClickHandlers : {}}
                     >
                         <div>
-                            <div className="before-after-slider__delimiter-icon" style={delimiterIconStyles}/>
+                            <div
+                                className="before-after-slider__delimiter-icon"
+                                style={preparedDelimiterIconStyles}
+                            />
                         </div>
                     </div>
                 </>
