@@ -1,0 +1,3 @@
+.before-after-slider{width:100%;position:relative}.before-after-slider__first-photo-container,.before-after-slider__second-photo-container{width:100%;overflow:hidden}.before-after-slider__second-photo-container{top:0;position:absolute}.before-after-slider img{max-width:none;width:100%;-moz-user-select:none;-webkit-user-select:none;user-select:none}.before-after-slider__delimiter{position:absolute;height:100%;width:5px;top:0;display:flex;justify-content:center;align-items:center}.before-after-slider__delimiter-icon{width:25px;height:25px;border-radius:50%;cursor:pointer}.before-after-slider__delimiter-img{cursor:pointer;user-select:none}
+.buttons-panel{max-width:800px}.buttons-panel__button-wrapper{margin:10px 0}
+.app{display:flex;justify-content:center}
