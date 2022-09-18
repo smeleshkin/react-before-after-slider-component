@@ -3,16 +3,15 @@
   position: relative;
 }
 .before-after-slider__first-photo-container, .before-after-slider__second-photo-container {
-  top: 0;
-  position: absolute;
-  height: 100%;
   width: 100%;
   overflow: hidden;
 }
-.before-after-slider img {
-  user-select: none;
+.before-after-slider__second-photo-container {
+  top: 0;
+  position: absolute;
 }
-.before-after-slider__first-photo-container img, .before-after-slider__second-photo-container img {
+.before-after-slider img {
+  max-width: none;
   width: 100%;
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -36,10 +35,5 @@
 .before-after-slider__delimiter-img {
   cursor: pointer;
   user-select: none;
-}
-
-.before-after-slider__size-fix-img {
-  width: 100%;
-  opacity: 0;
 }
 

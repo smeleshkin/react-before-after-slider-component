@@ -127,6 +127,12 @@ export default function BeforeAfterSlider({
         top: 0,
         left: 0,
     });
+
+    const onFirstImageLoad = () => {
+        updateContainerWidth();
+        onImageLoad();
+    }
+
     /**
      * Observer start
      */
@@ -241,25 +247,23 @@ export default function BeforeAfterSlider({
             onTouchCancel={onMouseUpHandler}
             {...(!feelsOnlyTheDelimiter ? onClickHandlers : {})}
         >
-            <img src={firstImage.imageUrl} className="before-after-slider__size-fix-img" onLoad={updateContainerWidth}/>
+            <div className="before-after-slider__first-photo-container">
+                <img
+                    src={firstImage.imageUrl}
+                    onLoad={onFirstImageLoad}
+                    draggable={false}
+                    alt={firstImage.alt}
+                />
+            </div>
             {Boolean(imagesWidth) && (
                 <>
-                    <div className="before-after-slider__first-photo-container">
-                        <img
-                            style={imgStyles}
-                            src={firstImage.imageUrl}
-                            onLoad={onImageLoad}
-                            draggable={false}
-                            alt={firstImage.alt}
-                        />
-                    </div>
                     <div className="before-after-slider__second-photo-container" style={secondImgContainerStyle}>
                         <img
                             style={imgStyles}
                             src={secondImage.imageUrl}
                             onLoad={onImageLoad}
                             draggable={false}
-                            alt={firstImage.alt}
+                            alt={secondImage.alt}
                         />
                     </div>
                     <div
