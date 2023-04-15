@@ -14,7 +14,7 @@ export interface Image {
 
 type OnSliderLoadCallback = () => void;
 
-enum MODE {
+export enum MODE {
     MOVE = 'move',
     DEFAULT = 'default',
 }
@@ -31,6 +31,7 @@ interface Props {
     feelsOnlyTheDelimiter?: boolean,
     delimiterIconStyles?: React.CSSProperties,
     delimiterColor?: string,
+    onChangeMode?: (newMode: MODE) => void,
 }
 
 function useReadyStatus(
@@ -111,6 +112,7 @@ export default function BeforeAfterSlider({
     delimiterIconStyles,
     feelsOnlyTheDelimiter = false,
     delimiterColor = DEFAULT_BACKGROUND_COLOR,
+    onChangeMode,
 }: Props) {
     const classNames = ['before-after-slider'];
     className && classNames.push(className);
@@ -178,7 +180,12 @@ export default function BeforeAfterSlider({
     }
 
     const onMouseUpHandler = () => {
-        setSliderMode(MODE.DEFAULT);
+        setSliderModeProxy(MODE.DEFAULT);
+    }
+
+    const setSliderModeProxy = (newMode: MODE) => {
+        setSliderMode(newMode);
+        onChangeMode && onChangeMode(newMode);
     }
 
     useInit(updateContainerWidth, onMouseUpHandler);
@@ -208,7 +215,7 @@ export default function BeforeAfterSlider({
 
     const onMouseDownHandler = () => {
         updateContainerPosition();
-        setSliderMode(MODE.MOVE);
+        setSliderModeProxy(MODE.MOVE);
     }
 
     const onMouseMoveHandler: MouseEventHandler<HTMLDivElement>
