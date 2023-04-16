@@ -10,3 +10,4 @@ webpack
 .github
 .npmrc
 tsconfig.json
+docket-compose.dev.yml

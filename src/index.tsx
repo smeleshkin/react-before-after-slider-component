@@ -14,7 +14,7 @@ export interface Image {
 
 type OnSliderLoadCallback = () => void;
 
-export enum MODE {
+enum MODE {
     MOVE = 'move',
     DEFAULT = 'default',
 }
@@ -34,6 +34,8 @@ interface Props {
     onChangeMode?: (newMode: MODE) => void,
 }
 
+type OnImageLoadCallback = (idx: 0 | 1) => void;
+
 function useReadyStatus(
     imagesWidth: number | null,
     refContainer: React.RefObject<HTMLDivElement>,
@@ -41,16 +43,18 @@ function useReadyStatus(
 ) {
     const [isReady, setIsReady] = useState(false);
 
-    const [imagesLoadedCount, setImagesLoadedCount] = useState(0);
-    const incrementLoadedImagesCount = () => {
-        setImagesLoadedCount(imagesLoadedCount + 1);
+    const imagesLoadedRef = useRef<[boolean, boolean]>([false, false]);
+    const onImageLoad = (idx: 0 | 1) => {
+        const newImagesLoadedRef: [boolean, boolean] = [...imagesLoadedRef.current];
+        newImagesLoadedRef[idx] = true;
+        imagesLoadedRef.current = newImagesLoadedRef;
     }
 
     useEffect(() => {
-        if (!isReady && imagesLoadedCount === 2 && imagesWidth && refContainer.current) {
+        if (!isReady && imagesLoadedRef.current.every(Boolean) && imagesWidth && refContainer.current) {
             setIsReady(true);
         }
-    }, [imagesLoadedCount, imagesWidth, isReady, refContainer.current]);
+    }, [imagesLoadedRef.current, imagesWidth, isReady, refContainer.current]);
 
     useEffect(() => {
         if(isReady && onReady) {
@@ -59,14 +63,24 @@ function useReadyStatus(
     }, [isReady]);
 
     return  {
-        onImageLoad: incrementLoadedImagesCount,
+        onImageLoad,
         isReady,
     };
 }
 
-function useInit(updateContainerWidth: () => void, onMouseUpHandler: () => void) {
+function useInit(
+    updateContainerWidth: () => void,
+    onMouseUpHandler: () => void,
+    firstImageRef: React.RefObject<HTMLImageElement>,
+    onImageLoad: OnImageLoadCallback,
+) {
     useEffect(() => {
         updateContainerWidth();
+        // With ssr the first image may already be loaded. The second image only appears on the client.
+        if (firstImageRef.current && firstImageRef.current.complete) {
+            onImageLoad(0);
+        }
+
         document.addEventListener('click', onMouseUpHandler);
         return () => {
             document.removeEventListener('click', onMouseUpHandler);
@@ -118,6 +132,8 @@ export default function BeforeAfterSlider({
     className && classNames.push(className);
 
     const refContainer = useRef<HTMLDivElement>(null);
+    const firstImageRef = useRef<HTMLImageElement>(null);
+
     const [imagesWidth, setImagesWidth] = useState<number | null>(null);
     const [delimiterPercentPosition, setDelimiterPosition] = useState(
         currentPercentPosition
@@ -132,7 +148,7 @@ export default function BeforeAfterSlider({
 
     const onFirstImageLoad = () => {
         updateContainerWidth();
-        onImageLoad();
+        onImageLoad(0);
     }
 
     /**
@@ -188,7 +204,12 @@ export default function BeforeAfterSlider({
         onChangeMode && onChangeMode(newMode);
     }
 
-    useInit(updateContainerWidth, onMouseUpHandler);
+    useInit(
+        updateContainerWidth,
+        onMouseUpHandler,
+        firstImageRef,
+        onImageLoad
+    );
 
     const imgStyles = !imagesWidth ? undefined : {width: `${imagesWidth}px`};
     const secondImgContainerStyle = {width: `${delimiterPercentPosition}%`};
@@ -260,6 +281,7 @@ export default function BeforeAfterSlider({
                     onLoad={onFirstImageLoad}
                     draggable={false}
                     alt={firstImage.alt}
+                    ref={firstImageRef}
                 />
             </div>
             {Boolean(imagesWidth) && (
@@ -268,7 +290,7 @@ export default function BeforeAfterSlider({
                         <img
                             style={imgStyles}
                             src={secondImage.imageUrl}
-                            onLoad={onImageLoad}
+                            onLoad={() => onImageLoad(1)}
                             draggable={false}
                             alt={secondImage.alt}
                         />
